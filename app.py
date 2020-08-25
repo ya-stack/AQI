@@ -1,19 +1,10 @@
-from flask import Flask,render_template,url_for,request
 import pandas as pd 
 
 import pickle
 import streamlit as st
 
-# classifier=pickle.load(pickle_in)
-# load the model from disk
 loaded_model=pickle.load(open('Random_forest_regressor.pkl', 'rb'))
-# app = Flask(__name__)
 
-# # @app.route('/')
-# def home():
-# 	return render_template('home.html')
-
-# @app.route('/predict',methods=['POST'])
 def predict(Average_Temp,Max_Temp,Min_Temp,Atm_Pressure,Average_humidity,Average_visibility,
             Average_windspeed,Maximum_sustained_windspeed):
     prediction = loaded_model.predict([[Average_Temp,Max_Temp,Min_Temp,Atm_Pressure,Average_humidity,Average_visibility,
@@ -43,7 +34,7 @@ def main():
                        Average_windspeed,Maximum_sustained_windspeed)
     st.success('Predicted PM2.5 for today is {}'.format(result))
     if st.button("About"):
-        st.text("Developed By Yachna hasija")
+        st.text("Developed By Yachna Hasija")
 
 if __name__=='__main__':
     main()
